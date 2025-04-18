@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Gylax</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="logo"><span class="material-symbols-outlined">shopping_cart</span> GYLAX</h2>
+      <nav class="nav">
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="#" class="nav-item "><span class="material-symbols-outlined">group</span> Customers</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">analytics</span> Analytics</a>
+        <a href="chat.html" class="nav-item"><span class="material-symbols-outlined">mail</span> Messages <span class="badge">14</span></a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">inventory_2</span> Products</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">report</span> Reports</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">settings</span> Settings</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">add</span> Add Product</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">logout</span> Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="header">
+        <h1>Dashboard</h1>
+        
+        <div class="admin">
+          <span class="material-symbols-outlined theme">light_mode</span>
+          <div class="profile">
+            <span>shalini</span>
+            <img src="https://i.pravatar.cc/40?img=9" alt="profile">
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="cards">
+        <div class="card orange">
+            <div id="orange">
+                <h4>Total Sales</h4>
+                <h2>$25,024</h2>
+                <p>Last 24 Hours</p>
+            </div>
+
+            <div class="circular-progress" data-progress="80">
+                <span class="progress-value">80%</span>
+              </div>
+              
+          <!-- <div class="progress"><span>80%</span></div> -->
+        </div>
+        <div class="card pink">
+            <div id="orange" >
+                <h4>Total Sales</h4>
+                <h2>$25,024</h2>
+                <p>Last 24 Hours</p>
+            </div>
+
+            <div class="circular-progress-pink" data-progress="30">
+                <span class="progress-value">30%</span>
+              </div>
+
+        </div>
+
+        <div class="card green">
+            <div id="orange">         
+         <h4>Total Sales</h4>
+          <h2>$25,024</h2>
+          <p>Last 24 Hours</p>
+        </div>
+
+           <div class="circular-progress-green" data-progress="50">
+                <span class="progress-value">50%</span>
+              </div>
+        </div>
+
+      </div>
+
+      <!-- Updates & Analytics -->
+      <div class="info-panels">
+        <div class="recent-updates">
+          <h3>Recent Update</h3>
+          <div class="update">
+            <img src="https://i.pravatar.cc/40?img=22" alt="">
+            <p><strong>GYLAX</strong> Received his order of USB</p>
+          </div>
+          <div class="update">
+            <img src="https://i.pravatar.cc/40?img=55" alt="">
+            <p><strong>Aryan</strong> Received his order of USB</p>
+          </div>
+          <div class="update">
+            <img src="https://i.pravatar.cc/40?" alt="">
+            <p><strong>Shalini</strong> Received his order of USB</p>
+          </div>
+        </div>
+
+        <div class="analytics">
+          <h3>Sales Analytics</h3>
+          <div class="analysis-card orange">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <div>
+              <h4>Online Orders</h4>
+              <p>Last seen 2 Hours</p>
+              <strong>-17% 3849</strong>
+            </div>
+          </div>
+          <div class="analysis-card green">
+            <span class="material-symbols-outlined">show_chart</span>
+            <div>
+              <h4>Online Orders</h4>
+              <p>Last seen 2 Hours</p>
+              <strong>+23% 4021</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="orders">
+        <h3>Recent Orders</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Product Number</th>
+              <th>Payments</th>
+              <th>Status</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mini USB</td>
+              <td>4563</td>
+              <td>Due</td>
+              <td class="pending">Pending</td>
+              <td><a href="#">Details</a></td>
+            </tr>
+            <tr>
+              <td>Mini USB</td>
+              <td>4563</td>
+              <td>Due</td>
+              <td class="pending">Pending</td>
+              <td><a href="#">Details</a></td>
+            </tr>
+            <tr>
+              <td>Mini USB</td>
+              <td>4563</td>
+              <td>Due</td>
+              <td class="pending">Pending</td>
+              <td><a href="#">Details</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+  <script src="dashboard.js"></script>
+
+</body>
+</html>

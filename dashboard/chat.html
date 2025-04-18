@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat - Gylax</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Chat-specific styles */
+    .chat-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 1rem;
+      overflow: hidden;
+      height: calc(100vh - 180px);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .chat-header {
+      background-color: #7380ec;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .chat-header h2 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .chat-header .status {
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.3rem 0.8rem;
+      border-radius: 1rem;
+    }
+    
+    .chat-messages {
+      padding: 1rem;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .message {
+      display: flex;
+      max-width: 75%;
+    }
+    
+    .message.received {
+      align-self: flex-start;
+    }
+    
+    .message.sent {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+    
+    .message .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin: 0 0.5rem;
+      align-self: flex-end;
+    }
+    
+    .message .content {
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      position: relative;
+    }
+    
+    .message.received .content {
+      background-color: #f0f0f0;
+      border-bottom-left-radius: 0;
+    }
+    
+    .message.sent .content {
+      background-color: #7380ec;
+      color: white;
+      border-bottom-right-radius: 0;
+    }
+    
+    .message .info {
+      font-size: 0.7rem;
+      margin-top: 0.3rem;
+      opacity: 0.7;
+    }
+    
+    .message.sent .info {
+      text-align: right;
+    }
+    
+    .chat-input {
+      display: flex;
+      padding: 1rem;
+      background-color: #f6f6f9;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    .chat-input input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 2rem;
+      outline: none;
+      font-size: 0.9rem;
+    }
+    
+    .chat-input button {
+      margin-left: 0.5rem;
+      background-color: #7380ec;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+    
+    .chat-input button:hover {
+      background-color: #5a67d8;
+    }
+    
+    .contacts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .contact {
+      background-color: white;
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .contact.active {
+      border: 2px solid #7380ec;
+    }
+    
+    .contact img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    
+    .contact-info {
+      flex: 1;
+    }
+    
+    .contact-name {
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .contact-status {
+      font-size: 0.8rem;
+      color: #777;
+      margin: 0;
+    }
+    
+    .contact .badge {
+      background-color: #ff7782;
+    }
+    
+    .contact .online-indicator {
+      width: 10px;
+      height: 10px;
+      background-color: #41f1b6;
+      border-radius: 50%;
+      margin-left: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="logo"><span class="material-symbols-outlined">shopping_cart</span> GYLAX</h2>
+      <nav class="nav">
+        <a href="dashboard2.html" class="nav-item"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">group</span> Customers</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">analytics</span> Analytics</a>
+        <a href="#" class="nav-item active"><span class="material-symbols-outlined">mail</span> Messages <span class="badge">14</span></a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">inventory_2</span> Products</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">report</span> Reports</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">settings</span> Settings</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">add</span> Add Product</a>
+        <a href="#" class="nav-item"><span class="material-symbols-outlined">logout</span> Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="header">
+        <h1>Messages</h1>
+        
+        <div class="admin">
+          <span class="material-symbols-outlined theme">light_mode</span>
+          <div class="profile">
+            <span>shalini</span>
+            <img src="https://i.pravatar.cc/40?img=9" alt="profile">
+          </div>
+        </div>
+      </div>
+
+      <!-- Contacts -->
+      <div class="contacts">
+        <div class="contact active">
+          <img src="https://i.pravatar.cc/40?img=22" alt="contact">
+          <div class="contact-info">
+            <h4 class="contact-name">Team Chat</h4>
+            <p class="contact-status">5 people online</p>
+          </div>
+          <div class="online-indicator"></div>
+        </div>
+        <div class="contact">
+          <img src="https://i.pravatar.cc/40?img=55" alt="contact">
+          <div class="contact-info">
+            <h4 class="contact-name">Aryan</h4>
+            <p class="contact-status">Last seen 5m ago</p>
+          </div>
+          <span class="badge">3</span>
+        </div>
+        <div class="contact">
+          <img src="https://i.pravatar.cc/40?img=33" alt="contact">
+          <div class="contact-info">
+            <h4 class="contact-name">GYLAX Support</h4>
+            <p class="contact-status">Online</p>
+          </div>
+          <div class="online-indicator"></div>
+        </div>
+        <div class="contact">
+          <img src="https://i.pravatar.cc/40?img=44" alt="contact">
+          <div class="contact-info">
+            <h4 class="contact-name">Customer Service</h4>
+            <p class="contact-status">Last seen today</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Container -->
+      <div class="chat-container">
+        <div class="chat-header">
+          <h2><span class="material-symbols-outlined">forum</span> Team Chat</h2>
+          <span class="status">5 online</span>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+          <!-- Messages will be dynamically inserted here -->
+        </div>
+        
+        <div class="chat-input">
+          <input type="text" id="message-input" placeholder="Type your message here...">
+          <button id="send-button"><span class="material-symbols-outlined">send</span></button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Sample user data
+    const currentUser = {
+      id: 'user1',
+      name: 'Shalini',
+      avatar: 'https://i.pravatar.cc/40?img=9'
+    };
+    
+    const users = {
+      'user1': {
+        name: 'Shalini',
+        avatar: 'https://i.pravatar.cc/40?img=9'
+      },
+      'user2': {
+        name: 'Aryan',
+        avatar: 'https://i.pravatar.cc/40?img=55'
+      },
+      'user3': {
+        name: 'GYLAX',
+        avatar: 'https://i.pravatar.cc/40?img=22'
+      }
+    };
+    
+    // Sample chat history
+    const chatHistory = [
+      {
+        id: 1,
+        userId: 'user3',
+        text: 'Good morning team! How is everyone doing today?',
+        timestamp: new Date(new Date().getTime() - 3600000)
+      },
+      {
+        id: 2,
+        userId: 'user2',
+        text: 'Morning! I\'m doing well, just finishing up the product reports.',
+        timestamp: new Date(new Date().getTime() - 3500000)
+      },
+      {
+        id: 3,
+        userId: 'user1',
+        text: 'Hello everyone! I\'ve updated the dashboard with new analytics features.',
+        timestamp: new Date(new Date().getTime() - 3400000)
+      },
+      {
+        id: 4,
+        userId: 'user2',
+        text: 'That\'s great! Can you share the new features in our meeting later?',
+        timestamp: new Date(new Date().getTime() - 3300000)
+      },
+      {
+        id: 5,
+        userId: 'user1',
+        text: 'Sure, I\'ll prepare a quick demo.',
+        timestamp: new Date(new Date().getTime() - 3200000)
+      }
+    ];
+    
+    // DOM elements
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+    const chatMessages = document.getElementById('chat-messages');
+    
+    // Initialize chat
+    function initChat() {
+      // Display chat history
+      chatHistory.forEach(message => {
+        addMessageToChat(message);
+      });
+      
+      // Set up event listeners
+      sendButton.addEventListener('click', sendMessage);
+      messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          sendMessage();
+        }
+      });
+      
+      // Theme toggle functionality
+      const themeToggle = document.querySelector('.theme');
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        
+        if (document.body.classList.contains('dark-theme')) {
+          themeToggle.textContent = 'dark_mode';
+        } else {
+          themeToggle.textContent = 'light_mode';
+        }
+      });
+      
+      // For the contacts
+      const contacts = document.querySelectorAll('.contact');
+      contacts.forEach(contact => {
+        contact.addEventListener('click', () => {
+          contacts.forEach(c => c.classList.remove('active'));
+          contact.classList.add('active');
+          
+          // In a real app, you would load the appropriate chat history here
+        });
+      });
+    }
+    
+    // Add message to the chat
+    function addMessageToChat(message) {
+      const messageElement = document.createElement('div');
+      const isCurrentUser = message.userId === currentUser.id;
+      messageElement.className = `message ${isCurrentUser ? 'sent' : 'received'}`;
+      
+      const user = users[message.userId];
+      const time = formatTime(message.timestamp);
+      
+      messageElement.innerHTML = `
+        <img src="${user.avatar}" class="avatar" alt="${user.name}">
+        <div class="content">
+          ${!isCurrentUser ? `<div><strong>${user.name}</strong></div>` : ''}
+          <div>${message.text}</div>
+          <div class="info">${time}</div>
+        </div>
+      `;
+      
+      chatMessages.appendChild(messageElement);
+      scrollToBottom();
+    }
+    
+    // Format timestamp
+    function formatTime(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    // Send message
+    function sendMessage() {
+      const text = messageInput.value.trim();
+      if (text === '') return;
+      
+      const newMessage = {
+        id: chatHistory.length + 1,
+        userId: currentUser.id,
+        text: text,
+        timestamp: new Date()
+      };
+      
+      chatHistory.push(newMessage);
+      addMessageToChat(newMessage);
+      
+      messageInput.value = '';
+      
+      // In a real app, you would send this message to the server here
+      
+      // For demo purposes, simulate a response
+      setTimeout(() => {
+        simulateReceivedMessage();
+      }, 1000);
+    }
+    
+    // Simulate receiving a message (for demo purposes)
+    function simulateReceivedMessage() {
+      const responses = [
+        "That sounds great!",
+        "Thanks for the update.",
+        "I'll check that out soon.",
+        "Could you share more details?",
+        "Let's discuss this in our meeting later."
+      ];
+      
+      const randomUser = Math.random() > 0.5 ? 'user2' : 'user3';
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      
+      const newMessage = {
+        id: chatHistory.length + 1,
+        userId: randomUser,
+        text: randomResponse,
+        timestamp: new Date()
+      };
+      
+      chatHistory.push(newMessage);
+      addMessageToChat(newMessage);
+    }
+    
+    // Scroll to the bottom of the chat
+    function scrollToBottom() {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Initialize when page loads
+    window.onload = initChat;
+  </script>
+  <!-- Include your dashboard.js if needed -->
+  <!-- <script src="dashboard.js"></script> -->
+</body>
+</html>
